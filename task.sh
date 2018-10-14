@@ -7,11 +7,19 @@ if [ $# -eq 0 ]; then
     exit
 fi
 
+dev="dev"
+out="docs"
+
 watch() {
-    trash ./docs &&
+    trash ./$dev &
     tsc --noEmit --preserveWatchOutput --watch src/ts/*.ts &
-    browser-sync start -s docs -w -f docs --no-open --no-ghost-mode --no-ui --no-online &
-    parcel watch -d docs --public-url "/cyoa-tracker/" --log-level 4 --no-hmr --no-autoinstall src/index.pug
+    browser-sync start -s $dev -w -f $dev --no-open --no-ghost-mode --no-ui --no-online &
+    parcel watch -d $dev --public-url "." --log-level 4 --no-hmr --no-autoinstall src/index.pug
+}
+
+build () {
+    trash ./$out &
+    parcel build -d $out --public-url "." --log-level 4 --no-autoinstall src/index.pug
 }
 
 eval "$@"

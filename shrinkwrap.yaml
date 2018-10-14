@@ -3,7 +3,7 @@ dependencies:
   lodash: 4.17.11
   vue: 2.5.17
 devDependencies:
-  autoprefixer: 9.1.5
+  autoprefixer: 9.2.0
   cssnano: 4.1.4
   postcss: 7.0.5
   pug: 2.0.3
@@ -121,9 +121,9 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
-  /autoprefixer/9.1.5:
+  /autoprefixer/9.2.0:
     dependencies:
-      browserslist: 4.2.0
+      browserslist: 4.2.1
       caniuse-lite: 1.0.30000890
       normalize-range: 0.1.2
       num2fraction: 1.2.2
@@ -134,7 +134,7 @@ packages:
       node: '>=6.0.0'
     hasBin: true
     resolution:
-      integrity: sha512-kk4Zb6RUc58ld7gdosERHMF3DzIYJc2fp5sX46qEsGXQQy5bXsu8qyLjoxuY1NuQ/cJuCYnx99BfjwnRggrYIw==
+      integrity: sha512-OuxUyTvzRe9EvKyouPqfr8QUkQ0pH400NOFzI1LFINO8zwgJr7ZTybLql03P//LjR0iWile2lCoy2vRTRSFpMw==
   /babel-runtime/6.26.0:
     dependencies:
       core-js: 2.5.7
@@ -197,7 +197,7 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-aNdbnj9P8PjdXU4ybaWLK2IF3jc/EoDYbC7AazW6to3TRsfXxscC9UXOB5iDiEQrkyIbWp2SLQda4+QAa7nc3w==
-  /browserslist/4.2.0:
+  /browserslist/4.2.1:
     dependencies:
       caniuse-lite: 1.0.30000890
       electron-to-chromium: 1.3.79
@@ -205,7 +205,7 @@ packages:
     dev: true
     hasBin: true
     resolution:
-      integrity: sha512-Berls1CHL7qfQz8Lct6QxYA5d2Tvt4doDWHcjvAISybpd+EKZVppNtXgXhaN6SdrPKo7YLTSZuYBs5cYrSWN8w==
+      integrity: sha512-1oO0c7Zhejwd+LXihS89WqtKionSbz298rJZKJgfrHIZhrV8AC15gw553VcB0lcEugja7IhWD7iAlrsamfYVPA==
   /cache-base/1.0.1:
     dependencies:
       collection-visit: 1.0.0
@@ -230,7 +230,7 @@ packages:
       integrity: sha1-m7UwTS4LVmmLLHWLCKPqqdqlijk=
   /caniuse-api/3.0.0:
     dependencies:
-      browserslist: 4.2.0
+      browserslist: 4.2.1
       caniuse-lite: 1.0.30000890
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
@@ -1406,7 +1406,7 @@ packages:
       integrity: sha512-fiznXjEN5T42Qm7qqMCVJXS3roaj9r4xsSi+meaBVe7CJBl8t/QLOXu02Z2E6oWAMWIvCuF6JrvzFekmVEbOKA==
   /postcss-colormin/4.0.2:
     dependencies:
-      browserslist: 4.2.0
+      browserslist: 4.2.1
       color: 3.1.0
       has: 1.0.3
       postcss: 7.0.5
@@ -1470,7 +1470,7 @@ packages:
       integrity: sha512-JavnI+V4IHWsaUAfOoKeMEiJQGXTraEy1nHM0ILlE6NIQPEZrJDAnPh3lNGZ5HAk2mSSrwp66JoGhvjp6SqShA==
   /postcss-merge-rules/4.0.2:
     dependencies:
-      browserslist: 4.2.0
+      browserslist: 4.2.1
       caniuse-api: 3.0.0
       cssnano-util-same-parent: 4.0.1
       postcss: 7.0.5
@@ -1504,7 +1504,7 @@ packages:
   /postcss-minify-params/4.0.1:
     dependencies:
       alphanum-sort: 1.0.2
-      browserslist: 4.2.0
+      browserslist: 4.2.1
       cssnano-util-get-arguments: 4.0.0
       postcss: 7.0.5
       postcss-value-parser: 3.3.1
@@ -1587,7 +1587,7 @@ packages:
       integrity: sha512-1nOtk7ze36+63ONWD8RCaRDYsnzorrj+Q6fxkQV+mlY5+471Qx9kspqv0O/qQNMeApg8KNrRf496zHwJ3tBZ7w==
   /postcss-normalize-unicode/4.0.1:
     dependencies:
-      browserslist: 4.2.0
+      browserslist: 4.2.1
       postcss: 7.0.5
       postcss-value-parser: 3.3.1
     dev: true
@@ -1627,7 +1627,7 @@ packages:
       integrity: sha512-PeJiLgJWPzkVF8JuKSBcylaU+hDJ/TX3zqAMIjlghgn1JBi6QwQaDZoDIlqWRcCAI8SxKrt3FCPSRmOgKRB97Q==
   /postcss-reduce-initial/4.0.2:
     dependencies:
-      browserslist: 4.2.0
+      browserslist: 4.2.1
       caniuse-api: 3.0.0
       has: 1.0.3
       postcss: 7.0.5
@@ -2049,7 +2049,7 @@ packages:
       integrity: sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==
   /stylehacks/4.0.1:
     dependencies:
-      browserslist: 4.2.0
+      browserslist: 4.2.1
       postcss: 7.0.5
       postcss-selector-parser: 3.1.1
     dev: true

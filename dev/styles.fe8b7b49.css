@@ -61,3 +61,13 @@ textarea {
   width: 8;
   resize: none;
 }
+
+::-moz-selection {
+  background: #343d46;
+  color: #dfe1e8;
+}
+
+::selection {
+  background: #343d46;
+  color: #dfe1e8;
+}

@@ -1,11 +1,7 @@
-// import codemirror from "codemirror"
-// import "codemirror/lib/codemirror.css"
-// import "codemirror/addon/scroll/scrollpastend.js"
-// import "codemirror/addon/scroll/simplescrollbars.js"
-// import "codemirror/addon/scroll/simplescrollbars.css"
-// import "codemirror/addon/selection/mark-selection.js"
+//  modules  ///////////////////////////////////////////////////////////
 
-import { debounce } from "lodash"
+import debounce from "lodash/debounce"
+import throttle from "lodash/throttle"
 
 //  constants  /////////////////////////////////////////////////////////
 
@@ -18,6 +14,20 @@ const regex = {
     header: /^\s*([#~]+)\W*(\d+(\.\d+)?)?/,
     item: /^\s*([~\-/=\*])\s*(\d+(\.\d+)?)/,
 }
+
+//  history  ///////////////////////////////////////////////////////////
+
+let undoStack = []
+let redoStack = []
+
+const undoPush = throttle(function(event) {
+    console.log(this)
+    undoStack.push(this)
+}, 500, { leading: false })
+
+const undoPop = (function(event) {
+    return undoStack.pop()
+})
 
 //  grep  //////////////////////////////////////////////////////////////
 
@@ -39,36 +49,46 @@ let editor: HTMLInputElement = document.querySelector(element.editor)
 
 editor.addEventListener("keydown", function(event) {
 
+    redoStack = []
+
+    console.log(event)
+
+    //  gather intel
     const start = this.selectionStart
     const end = this.selectionEnd
     const before = this.value.substring(0, start)
     const after = this.value.substring(end)
 
-    if (event.keyCode === 9 || event.which === 9) {
-        event.preventDefault()
+    //  input handlers
 
+    //  insert tabs instead of switching focus
+    if (event.key === "Tab") {
+        event.preventDefault()
         this.value = before + "\t" + after
         this.selectionEnd = start + 1
     }
 
-    else if (event.keyCode === 13 || event.which === 13) {
+    //  auto-indent on enter
+    //  clear auto-indent if line is empty
+    else if (event.key === "Enter") {
         event.preventDefault()
-
         let lines = before.split("\n")
         let current = lines[lines.length -1]
-
         let indent = 0
-        while (current.charAt(indent) === "\t") {
-            indent++
-        }
-
+        while (current.charAt(indent) === "\t") { indent++ }
         this.value = before + "\n" + "\t".repeat(indent) + after
         this.selectionEnd = start + 1 + indent
     }
 
+    //  undo logic
+
+    if (event.key.length === 1 || event.key === "Tab" || event.key === "Backspace" || event.key === "Delete" || event.key == "Enter") {
+        console.log("test")
+    }
+
 })
 
-editor.addEventListener("input", update)
+editor.addEventListener("propertychange", undoPush)
 
 editor.value = `####\tDIVINE TRIALS
 
