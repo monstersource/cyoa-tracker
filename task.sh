@@ -11,7 +11,7 @@ watch() {
     trash ./docs &&
     tsc --noEmit --preserveWatchOutput --watch src/ts/*.ts &
     browser-sync start -s docs -w -f docs --no-open --no-ghost-mode --no-ui --no-online &
-    parcel watch -d docs --log-level 4 --no-hmr --no-autoinstall src/index.pug
+    parcel watch -d docs --public-url "/cyoa-tracker/" --log-level 4 --no-hmr --no-autoinstall src/index.pug
 }
 
 eval "$@"
