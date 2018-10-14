@@ -1,0 +1,67 @@
+@import "base16/base16-ocean.sass"
+
+//  core
+
+*
+    box-sizing: border-box
+    font: inherit
+    padding: 0
+    margin: 0
+
+html
+    font-size: 8px
+
+body
+    display: flex
+    flex-direction: column
+    font: 2rem/3rem monospace
+    background: $base00
+    color: $base05
+    height: 100vh
+
+//  sections
+
+#header, #footer
+    display: flex
+    background: $base01
+
+    nav
+        display: flex
+        margin-left: auto
+
+    h1, h2, a
+        padding: 1rem 2rem
+
+    h1, h2
+        font-weight: bold
+
+    a
+        color: inherit
+        cursor: pointer
+        text-decoration: none
+
+        &:hover
+            background: $base0e
+            color: $base00
+
+#editor
+    display: flex
+    align-items: stretch
+    justify-content: center
+    flex: 1
+    flex-direction: column
+
+//  editor
+
+textarea
+    display: block
+    flex: 1
+    background: $base00
+    color: $base05
+    padding: 1rem 2rem
+    margin: 0
+    border: 0
+    width: 8
+    resize: none
+
+//  sections
