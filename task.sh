@@ -19,7 +19,7 @@ watch() {
 
 build () {
     trash ./$out &
-    parcel build -d $out --public-url "." --log-level 4 --no-autoinstall src/index.pug
+    parcel build -d $out --public-url "." --log-level 4 --no-autoinstall --no-source-maps --experimental-scope-hoisting src/index.pug
 }
 
 eval "$@"

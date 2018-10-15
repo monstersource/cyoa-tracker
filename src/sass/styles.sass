@@ -1,4 +1,4 @@
-@import "base16/base16-ocean.sass"
+@import "base16/base16-gruvbox-dark-medium.sass"
 
 //  core
 
@@ -12,17 +12,23 @@ html
     font-size: 8px
 
 body
-    display: flex
-    flex-direction: column
     font: 2rem/3rem monospace
     background: $base00
     color: $base05
-    height: 100vh
 
 //  sections
 
+#header
+    top: 0
+
+#footer
+    bottom: 0
+
 #header, #footer
     display: flex
+    position: absolute
+    left: 0
+    right: 0
     background: $base01
 
     nav
@@ -44,28 +50,68 @@ body
             background: $base0e
             color: $base00
 
+#editor .CodeMirror
+    position: absolute
+    top: 6rem
+    bottom: 6rem
+    left: 0
+    right: 0
+    height: auto
+
+//  codemirror
+
 #editor
-    display: flex
-    align-items: stretch
-    justify-content: center
-    flex: 1
-    flex-direction: column
 
-//  editor
+    .CodeMirror
+        background: $base00
+        color: $base05
 
-textarea
-    display: block
-    flex: 1
-    background: $base00
-    color: $base05
-    padding: 1rem 2rem
-    margin: 0
-    border: 0
-    width: 8
-    resize: none
+    .CodeMirror-cursor
+        border-color: $base0a
 
-::selection
-    background: $base01
-    color: $base06
+    .CodeMirror-selected
+        background: $base01
 
-//  sections
+    // .CodeMirror-selectedtext
+    //     color: $base00 !important
+
+    .CodeMirror-gutters
+        background: $base00
+        border: none
+
+    .CodeMirror-linenumbers
+        min-width: 4rem
+        padding-right: 1rem
+
+    .CodeMirror-linenumber
+        color: $base03
+
+    .CodeMirror-simplescroll-horizontal,
+    .CodeMirror-simplescroll-vertical
+        background: $base00
+
+        div
+            background: $base02
+            border: none
+            border-radius: 0
+
+//  syntax highlighting
+
+#editor
+
+    .cm-header, .cm-subheader
+        color: $base0e
+        font-weight: bold
+
+    .cm-plus
+        color: $base0b
+
+    .cm-minus
+        color: $base08
+
+    .cm-equals
+        color: $base0d
+
+    // .cm-subheader
+    //     color: $base08
+    //     font-weight: normal

@@ -10,17 +10,25 @@ html {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
   font: 2rem/3rem monospace;
-  background: #2b303b;
-  color: #c0c5ce;
-  height: 100vh;
+  background: #282828;
+  color: #d5c4a1;
+}
+
+#header {
+  top: 0;
+}
+
+#footer {
+  bottom: 0;
 }
 
 #header, #footer {
   display: flex;
-  background: #343d46;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: #3c3836;
 }
 #header nav, #footer nav {
   display: flex;
@@ -38,36 +46,61 @@ body {
   text-decoration: none;
 }
 #header a:hover, #footer a:hover {
-  background: #b48ead;
-  color: #2b303b;
+  background: #d3869b;
+  color: #282828;
 }
 
-#editor {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  flex: 1;
-  flex-direction: column;
+#editor .CodeMirror {
+  position: absolute;
+  top: 6rem;
+  bottom: 6rem;
+  left: 0;
+  right: 0;
+  height: auto;
 }
 
-textarea {
-  display: block;
-  flex: 1;
-  background: #2b303b;
-  color: #c0c5ce;
-  padding: 1rem 2rem;
-  margin: 0;
-  border: 0;
-  width: 8;
-  resize: none;
+#editor .CodeMirror {
+  background: #282828;
+  color: #d5c4a1;
+}
+#editor .CodeMirror-cursor {
+  border-color: #fabd2f;
+}
+#editor .CodeMirror-selected {
+  background: #3c3836;
+}
+#editor .CodeMirror-gutters {
+  background: #282828;
+  border: none;
+}
+#editor .CodeMirror-linenumbers {
+  min-width: 4rem;
+  padding-right: 1rem;
+}
+#editor .CodeMirror-linenumber {
+  color: #665c54;
+}
+#editor .CodeMirror-simplescroll-horizontal,
+#editor .CodeMirror-simplescroll-vertical {
+  background: #282828;
+}
+#editor .CodeMirror-simplescroll-horizontal div,
+#editor .CodeMirror-simplescroll-vertical div {
+  background: #504945;
+  border: none;
+  border-radius: 0;
 }
 
-::-moz-selection {
-  background: #343d46;
-  color: #dfe1e8;
+#editor .cm-header, #editor .cm-subheader {
+  color: #d3869b;
+  font-weight: bold;
 }
-
-::selection {
-  background: #343d46;
-  color: #dfe1e8;
+#editor .cm-plus {
+  color: #b8bb26;
+}
+#editor .cm-minus {
+  color: #fb4934;
+}
+#editor .cm-equals {
+  color: #83a598;
 }
