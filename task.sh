@@ -13,6 +13,7 @@ out="docs"
 watch() {
     trash ./$dev &
     tsc --noEmit --preserveWatchOutput --watch src/ts/*.ts &
+    # tsc --noEmit --watch src/ts/*.ts &
     browser-sync start -s $dev -w -f $dev --no-open --no-ghost-mode --no-ui --no-online &
     parcel watch -d $dev --public-url "." --log-level 4 --no-hmr --no-autoinstall src/index.pug
 }

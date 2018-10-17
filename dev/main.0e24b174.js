@@ -10395,41 +10395,85 @@ var element = {
 var number = {
   undoMax: 5,
   delay: 500
+};
+var regex = {
+  header: /^[#~]+/
 }; //  utilities
 //  parser  ////////////////////////////////////////////////////////////
 //  functions
+//  returns an array of non-empty lines stripped of whitespace
 
-var header = function header(data, options) {
-  if (options === void 0) {
-    options = {
-      check: true
-    };
+var splitLines = function splitLines(content) {
+  return content.split("\n").filter(function (line) {
+    return line;
+  }).map(function (line) {
+    return line.replace(/[^\d\.+\-/=*#~]/g, "");
+  });
+}; //  returns the array split into sections based on markup headers
+
+
+var splitSections = function splitSections(lines) {
+  var init = [[{
+    line: 0,
+    content: null
+  }]];
+  var output = init;
+  var section = 0;
+
+  for (var i = 0, max = lines.length; i < max; i++) {
+    var line = lines[i];
+
+    if (regex.header.test(line)) {
+      if (output !== init) {
+        output.push([]);
+        section++;
+      }
+    }
+
+    console.log(output);
+    output[section].push({
+      line: i,
+      content: line
+    });
   }
 
-  if (options.check === true) {}
-}; // const checkHeader = (line) => {
-//     const split = line.trim().split(/\s+/)
-//     console.log(split)
-//     if (/[#~]/.test(split[0])) {
-//         console.log("a header!")
-//         return true
-//     }
-// }
-// const whiteSplice = (line) => line.trim().split(/\s+/)
+  return output;
+};
 
+var grepEditor = function grepEditor(editorValue) {
+  var lines = editorValue.split("\n");
 
-var isHeader = {}; // let line = "\t= 4,0u00\tace banana pet detana".trim().split(/\s+/)
-// if (!/[+\-/=*]/.test(line[0])) {
-//     console.log("not correct")
-// }
-// if (isNaN(line[1].replace(/,/g, ""))) {
-//     console.log("not a number")
-// }
-// console.log(line)
-//  editor  ////////////////////////////////////////////////////////////
+  for (var i = 0, max = lines.length; i < max; i++) {
+    var line = lines[i].split(/\s+/);
+    console.log(line);
+  }
+
+  console.log(lines); // let lines = editorValue.replace(/[ \t]/g, "").split("\n")
+  // let sections = [[[0, "###zeroline"]]], sectionNumber = 0
+  //
+  // for (let i = 0, max = lines.length; i < max; i++) {
+  //     let line = lines[i]
+  //     // console.log(i + 1, line)
+  //     if (/^[#~]+/.test(line)) {
+  //         sections.push([])
+  //         sectionNumber++
+  //         sections[sectionNumber].push([i, line])
+  //     }
+  //     else {
+  //         sections[sectionNumber].push([i, line])
+  //     }
+  // }
+  //
+  // sections.forEach(section => {
+  //     let filtered = section.filter(line => console.log(line[1]))
+  //     console.log(section)
+  // }
+  // console.log(sections)
+}; //  editor  ////////////////////////////////////////////////////////////
 //  syntax highlighting
 //  editor  ////////////////////////////////////////////////////////////
 //  creation
+
 
 var editor = codemirror_1["default"](document.querySelector(element.editor), {
   autofocus: true,
@@ -10450,8 +10494,9 @@ var editor = codemirror_1["default"](document.querySelector(element.editor), {
   viewportMargin: 6
 }); //  population
 
-editor.setValue("###\theader test\n\n~~~\tsubheader test\n\n\t\t~~~indent test\n\n+++++++++++++ 4\taoeu\n+ 4\taoeu\n- 2\ttest\n-2test\n= 8\tbuttersafe\n");
+editor.setValue("###\t40] header test 40\n\n~~~\tsubheader test\n\n-1000.00 testing these too\n-3,000,000 aoeu this shouldn't work\n\n\t\t~~~indent test\n\n+++++++++++++ 4\taoeu\n+ 4\taoeu 40\n- 2\ttest\n-2 test\n= 8\tbuttersafe\n");
 editor.focus();
 editor.setCursor(0, 0);
+grepEditor(editor.getValue());
 },{"codemirror":"../node_modules/codemirror/lib/codemirror.js","codemirror/lib/codemirror.css":"../node_modules/codemirror/lib/codemirror.css","codemirror/addon/mode/simple":"../node_modules/codemirror/addon/mode/simple.js","codemirror/addon/scroll/scrollpastend":"../node_modules/codemirror/addon/scroll/scrollpastend.js","codemirror/addon/scroll/simplescrollbars.css":"../node_modules/codemirror/lib/codemirror.css","codemirror/addon/scroll/simplescrollbars":"../node_modules/codemirror/addon/scroll/simplescrollbars.js","codemirror/addon/selection/mark-selection":"../node_modules/codemirror/addon/selection/mark-selection.js"}]},{},["ts/main.ts"], null)
 //# sourceMappingURL=main.0e24b174.map
