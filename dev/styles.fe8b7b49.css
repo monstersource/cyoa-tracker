@@ -83,6 +83,7 @@ body {
 #editor .CodeMirror-simplescroll-horizontal,
 #editor .CodeMirror-simplescroll-vertical {
   background: #282828;
+  width: 1rem;
 }
 #editor .CodeMirror-simplescroll-horizontal div,
 #editor .CodeMirror-simplescroll-vertical div {

@@ -1,9 +1,10 @@
 //  main  //////////////////////////////////////////////////////////////
 
-//  modules
+// modules
 
 import debounce from "lodash/debounce"
 import throttle from "lodash/throttle"
+import reduce   from "lodash/reduce"
 
 import codemirror from "codemirror"
 
@@ -14,7 +15,7 @@ import "codemirror/addon/scroll/simplescrollbars.css"
 import "codemirror/addon/scroll/simplescrollbars"
 import "codemirror/addon/selection/mark-selection"
 
-//  constants
+// constants
 
 const element = {
     editor: "#editor",
@@ -27,75 +28,51 @@ const number = {
 }
 
 const regex = {
-    header: /^[#~]+/,
+    header: /^\s*[#~]+\s+(.*)$/,
+    value: /^\s*([+\-/=*])\s*(\d+(?:[.,]\d+)?)/,
 }
-
-//  utilities
 
 //  parser  ////////////////////////////////////////////////////////////
 
-//  functions
-
-//  returns an array of non-empty lines stripped of whitespace
-const splitLines = (content: string): string[] => {
-    return content
-        .split("\n")
-        .filter(line => line)
-        .map(line => line.replace(/[^\d\.+\-/=*#~]/g, ""))
-}
-
-//  returns the array split into sections based on markup headers
-const splitSections = (lines: string[]) => {
-    const init = [[{ line: 0, content: null }]]
-    let output = init
-    let section = 0
-    for (let i = 0, max = lines.length; i < max; i++) {
-        let line = lines[i]
-        if (regex.header.test(line)) {
-            if (output !== init) {
-                output.push([])
-                section++
-            }
-        }
-        console.log(output)
-        output[section].push({ line: i, content: line })
-    }
-    return output
-}
-
 const grepEditor = (editorValue: string): void => {
 
+    // add a generic header to the document to make sure there's
+    // actually something there.
+    // useful since line numbers start at 1 and arrays start at 0.
+    editorValue = "### start\n" + editorValue
+
+    // split editor content
     let lines = editorValue.split("\n")
 
+    // create grouped array of sections with regex results
+    let sections = [], number = -1
     for (let i = 0, max = lines.length; i < max; i++) {
-        let line = lines[i].split(/\s+/)
-        console.log(line)
+
+        // trim whitespace
+        let line = lines[i].trim()
+
+        // get regex results
+        let header = line.match(regex.header)
+        let value = line.match(regex.value)
+
+        // ignore the line if it's not important
+        if (!header && !value) { continue }
+
+        // create a new section if it's a header
+        if (header) {
+            sections.push([])
+            number++
+        }
+
+        // push the result to the sections array
+        sections[number].push([i, line, header, value])
     }
 
-    console.log(lines)
+    // get rid of the secret bonus section if it's empty
+    if (sections[0].length === 1) { sections.shift() }
 
-    // let lines = editorValue.replace(/[ \t]/g, "").split("\n")
-    // let sections = [[[0, "###zeroline"]]], sectionNumber = 0
-    //
-    // for (let i = 0, max = lines.length; i < max; i++) {
-    //     let line = lines[i]
-    //     // console.log(i + 1, line)
-    //     if (/^[#~]+/.test(line)) {
-    //         sections.push([])
-    //         sectionNumber++
-    //         sections[sectionNumber].push([i, line])
-    //     }
-    //     else {
-    //         sections[sectionNumber].push([i, line])
-    //     }
-    // }
-    //
-    // sections.forEach(section => {
-    //     let filtered = section.filter(line => console.log(line[1]))
-    //     console.log(section)
-    // }
+    console.log(sections)
 
-    // console.log(sections)
 }
 
 //  editor  ////////////////////////////////////////////////////////////
@@ -127,19 +104,24 @@ const editor = codemirror(document.querySelector(element.editor), {
 
 //  population
 
-editor.setValue(`###\t40] header test 40
+editor.setValue(`### test further
+    + 8
+- 4
 
+
+
+
+    ###\t40] header test 40
 ~~~\tsubheader test
-
+a line with nothing on it, for testing.
 -1000.00 testing these too
 -3,000,000 aoeu this shouldn't work
-
 \t\t~~~indent test
-
 +++++++++++++ 4\taoeu
 + 4\taoeu 40
 - 2\ttest
 -2 test
+### another section
 = 8\tbuttersafe
 `)
 

@@ -10385,7 +10385,7 @@ require("codemirror/addon/scroll/simplescrollbars.css");
 
 require("codemirror/addon/scroll/simplescrollbars");
 
-require("codemirror/addon/selection/mark-selection"); //  constants
+require("codemirror/addon/selection/mark-selection"); // constants
 
 
 var element = {
@@ -10397,78 +10397,48 @@ var number = {
   delay: 500
 };
 var regex = {
-  header: /^[#~]+/
-}; //  utilities
-//  parser  ////////////////////////////////////////////////////////////
-//  functions
-//  returns an array of non-empty lines stripped of whitespace
-
-var splitLines = function splitLines(content) {
-  return content.split("\n").filter(function (line) {
-    return line;
-  }).map(function (line) {
-    return line.replace(/[^\d\.+\-/=*#~]/g, "");
-  });
-}; //  returns the array split into sections based on markup headers
-
-
-var splitSections = function splitSections(lines) {
-  var init = [[{
-    line: 0,
-    content: null
-  }]];
-  var output = init;
-  var section = 0;
-
-  for (var i = 0, max = lines.length; i < max; i++) {
-    var line = lines[i];
-
-    if (regex.header.test(line)) {
-      if (output !== init) {
-        output.push([]);
-        section++;
-      }
-    }
-
-    console.log(output);
-    output[section].push({
-      line: i,
-      content: line
-    });
-  }
-
-  return output;
-};
+  header: /^\s*[#~]+\s+(.*)$/,
+  value: /^\s*([+\-/=*])\s*(\d+(?:[.,]\d+)?)/
+}; //  parser  ////////////////////////////////////////////////////////////
 
 var grepEditor = function grepEditor(editorValue) {
-  var lines = editorValue.split("\n");
+  // add a generic header to the document to make sure there's
+  // actually something there.
+  // useful since line numbers start at 1 and arrays start at 0.
+  editorValue = "### start\n" + editorValue; // split editor content
+
+  var lines = editorValue.split("\n"); // create grouped array of sections with regex results
+
+  var sections = [],
+      number = -1;
 
   for (var i = 0, max = lines.length; i < max; i++) {
-    var line = lines[i].split(/\s+/);
-    console.log(line);
+    // trim whitespace
+    var line = lines[i].trim(); // get regex results
+
+    var header = line.match(regex.header);
+    var value = line.match(regex.value); // ignore the line if it's not important
+
+    if (!header && !value) {
+      continue;
+    } // create a new section if it's a header
+
+
+    if (header) {
+      sections.push([]);
+      number++;
+    } // push the result to the sections array
+
+
+    sections[number].push([i, line, header, value]);
+  } // get rid of the secret bonus section if it's empty
+
+
+  if (sections[0].length === 1) {
+    sections.shift();
   }
 
-  console.log(lines); // let lines = editorValue.replace(/[ \t]/g, "").split("\n")
-  // let sections = [[[0, "###zeroline"]]], sectionNumber = 0
-  //
-  // for (let i = 0, max = lines.length; i < max; i++) {
-  //     let line = lines[i]
-  //     // console.log(i + 1, line)
-  //     if (/^[#~]+/.test(line)) {
-  //         sections.push([])
-  //         sectionNumber++
-  //         sections[sectionNumber].push([i, line])
-  //     }
-  //     else {
-  //         sections[sectionNumber].push([i, line])
-  //     }
-  // }
-  //
-  // sections.forEach(section => {
-  //     let filtered = section.filter(line => console.log(line[1]))
-  //     console.log(section)
-  // }
-  // console.log(sections)
+  console.log(sections);
 }; //  editor  ////////////////////////////////////////////////////////////
 //  syntax highlighting
 //  editor  ////////////////////////////////////////////////////////////
@@ -10494,7 +10464,7 @@ var editor = codemirror_1["default"](document.querySelector(element.editor), {
   viewportMargin: 6
 }); //  population
 
-editor.setValue("###\t40] header test 40\n\n~~~\tsubheader test\n\n-1000.00 testing these too\n-3,000,000 aoeu this shouldn't work\n\n\t\t~~~indent test\n\n+++++++++++++ 4\taoeu\n+ 4\taoeu 40\n- 2\ttest\n-2 test\n= 8\tbuttersafe\n");
+editor.setValue("### test further\n    + 8\n- 4\n\n\n\n\n    ###\t40] header test 40\n~~~\tsubheader test\na line with nothing on it, for testing.\n-1000.00 testing these too\n-3,000,000 aoeu this shouldn't work\n\t\t~~~indent test\n+++++++++++++ 4\taoeu\n+ 4\taoeu 40\n- 2\ttest\n-2 test\n### another section\n= 8\tbuttersafe\n");
 editor.focus();
 editor.setCursor(0, 0);
 grepEditor(editor.getValue());
