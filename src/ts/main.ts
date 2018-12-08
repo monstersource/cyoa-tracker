@@ -34,6 +34,12 @@ const regex = {
 
 //  interface  /////////////////////////////////////////////////////////
 
+// clear editor
+const editorClear = (): void => {
+    editor.setValue("")
+    updateStorage()
+}
+
 // push values to output
 const displayResults = (results: any, total: number): void => {
 
