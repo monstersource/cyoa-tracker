@@ -1,4 +1,4 @@
-@import "base16/base16-gruvbox-dark-medium.sass"
+@import "base16/base16-ocean.sass"
 
 //  core
 
@@ -18,11 +18,19 @@ body
 
 //  sections
 
+#sidebar
+    position: fixed
+    display: none
+    top: 6rem
+    right: 2rem
+    padding: 1rem 2rem
+    background: $base01
+
+    h2
+        font-weight: bold
+
 #header
     top: 0
-
-#footer
-    bottom: 0
 
 #header, #footer
     display: flex
@@ -34,6 +42,7 @@ body
     nav
         display: flex
         margin-left: auto
+        flex-shrink: 0
 
     h1, h2, a
         padding: 1rem 2rem
@@ -49,6 +58,23 @@ body
         &:hover
             background: $base0e
             color: $base00
+
+#footer
+    bottom: 0
+
+    .output
+        display: flex
+        overflow-x: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+
+    .result
+        display: flex
+        padding: 1rem 2rem
+
+        .line-number
+            margin-right: 1rem
+            color: $base04
 
 #editor .CodeMirror
     position: absolute

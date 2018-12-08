@@ -11,16 +11,24 @@ html {
 
 body {
   font: 2rem/3rem monospace;
-  background: #282828;
-  color: #d5c4a1;
+  background: #2b303b;
+  color: #c0c5ce;
+}
+
+#sidebar {
+  position: fixed;
+  display: none;
+  top: 6rem;
+  right: 2rem;
+  padding: 1rem 2rem;
+  background: #343d46;
+}
+#sidebar h2 {
+  font-weight: bold;
 }
 
 #header {
   top: 0;
-}
-
-#footer {
-  bottom: 0;
 }
 
 #header, #footer {
@@ -28,11 +36,12 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  background: #3c3836;
+  background: #343d46;
 }
 #header nav, #footer nav {
   display: flex;
   margin-left: auto;
+  flex-shrink: 0;
 }
 #header h1, #header h2, #header a, #footer h1, #footer h2, #footer a {
   padding: 1rem 2rem;
@@ -46,8 +55,26 @@ body {
   text-decoration: none;
 }
 #header a:hover, #footer a:hover {
-  background: #d3869b;
-  color: #282828;
+  background: #b48ead;
+  color: #2b303b;
+}
+
+#footer {
+  bottom: 0;
+}
+#footer .output {
+  display: flex;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#footer .result {
+  display: flex;
+  padding: 1rem 2rem;
+}
+#footer .result .line-number {
+  margin-right: 1rem;
+  color: #a7adba;
 }
 
 #editor .CodeMirror {
@@ -60,17 +87,17 @@ body {
 }
 
 #editor .CodeMirror {
-  background: #282828;
-  color: #d5c4a1;
+  background: #2b303b;
+  color: #c0c5ce;
 }
 #editor .CodeMirror-cursor {
-  border-color: #fabd2f;
+  border-color: #ebcb8b;
 }
 #editor .CodeMirror-selected {
-  background: #3c3836;
+  background: #343d46;
 }
 #editor .CodeMirror-gutters {
-  background: #282828;
+  background: #2b303b;
   border: none;
 }
 #editor .CodeMirror-linenumbers {
@@ -78,30 +105,30 @@ body {
   padding-right: 1rem;
 }
 #editor .CodeMirror-linenumber {
-  color: #665c54;
+  color: #65737e;
 }
 #editor .CodeMirror-simplescroll-horizontal,
 #editor .CodeMirror-simplescroll-vertical {
-  background: #282828;
+  background: #2b303b;
   width: 1rem;
 }
 #editor .CodeMirror-simplescroll-horizontal div,
 #editor .CodeMirror-simplescroll-vertical div {
-  background: #504945;
+  background: #4f5b66;
   border: none;
   border-radius: 0;
 }
 
 #editor .cm-header, #editor .cm-subheader {
-  color: #d3869b;
+  color: #b48ead;
   font-weight: bold;
 }
 #editor .cm-plus {
-  color: #b8bb26;
+  color: #a3be8c;
 }
 #editor .cm-minus {
-  color: #fb4934;
+  color: #bf616a;
 }
 #editor .cm-equals {
-  color: #83a598;
+  color: #8fa1b3;
 }
