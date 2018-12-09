@@ -20,7 +20,7 @@ starting any line with a simple maths operation will apply it to the running tot
 
 will total out at: 40 - 10 + 5 = **35**.
 
-the system also supports decimals:
+you can even use (basic) decimals:
 
 ```
 + 10.5
