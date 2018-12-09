@@ -20,6 +20,16 @@ starting any line with a simple maths operation will apply it to the running tot
 
 will total out at: 40 - 10 + 5 = **35**.
 
+the system also supports decimals:
+
+```
++ 10.5
+-  4
++  2.5
+```
+
+for a total of: 10.5 - 4 + 2.5 = **9**.
+
 ### multiplication and division
 
 the system also supports multiplication and division:
@@ -138,6 +148,42 @@ if you use any other characters as headings, the cyoa tracker will ignore them. 
 
 is read as a single continuous section.
 
+### whitespace
+
+whitespace - specifically, spaces and tabs - is almost entirely ignored by the tracker. you can add as many new lines as you like, and put as many spaces between things as you like, and for the most part the system will work just fine:
+
+```
++       40          this line
++40 is treated the same as this one
+```
+
+there are some exceptions, however. for example, the three lines below are not the same:
+
+```
++ 40 a simple test
++ 4 0 a s i m p l e t e s t
++40asimpletest
+```
+
+the first works fine; the second parses "+ 4" and ignores the rest; the third is ignored entirely, as "+40asimpletest" is not a valid operation. a space is required after your actual numbers so you can have things like this:
+
+```
++ 40 10,000 bees in your ears
+```
+
+### european decimals
+
+the system treats commas and full stops identically within numbers:
+
+```
++ 4,00
+- 4.00
+```
+
+so the total here is: 4 - 4 = **0**.
+
+this does mean you can't use commas for large numbers like 6,000,000, but since most CYOAs don't go that high it's not a huge loss.
+
 ## additional notes
 
 ### saving your data
@@ -153,6 +199,8 @@ the quickest way to download this for offline use is to use your browser's "save
 ## contributing
 
 the cyoa tracker is built entirely on linux and is probably incompatible with a windows development environment.
+
+currently the best way to contribute is to test the tracker yourself and report back with any errors or glitches you find.
 
 ### building using task.sh
 
