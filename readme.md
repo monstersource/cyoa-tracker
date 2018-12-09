@@ -75,7 +75,7 @@ and since this is for CYOAs, you can also add text to show what each value is fo
 
 which totals at: (20 - 10) * 2 - 40 = **-20**.
 
-### advanced information
+## advanced information
 
 ### sections
 
