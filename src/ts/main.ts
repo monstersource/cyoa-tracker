@@ -20,6 +20,7 @@ import "codemirror/addon/selection/mark-selection"
 const element = {
     editor: "#editor",
     output: "#output",
+    clear: "#clear",
 }
 
 const number = {
@@ -35,15 +36,17 @@ const regex = {
 //  interface  /////////////////////////////////////////////////////////
 
 // clear editor
-const editorClear = (): void => {
+document.querySelector(element.clear).addEventListener("click", () => {
+    console.log("clearing...")
     editor.setValue("")
     updateStorage()
-}
+    editor.focus()
+})
 
 // push values to output
 const displayResults = (results: any, total: number): void => {
 
-    console.log(results, total)
+    // console.log(results, total)
 
     let sidebar = `
         <h2>results</h2>`
@@ -227,5 +230,8 @@ editor.on("change", debounce(grepEditor, 600))
 
 //  population
 
+editor.setValue(`###\tmonstersource cyoa tracker
+`)
+
 editor.focus()
-editor.setCursor(0, 0)
+editor.setCursor(9999, 9999)

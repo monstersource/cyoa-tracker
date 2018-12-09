@@ -11,7 +11,7 @@ dev="dev"
 out="docs"
 
 watch() {
-    trash ./$dev &
+    rm -r --preserve-root $dev &
     tsc --noEmit --preserveWatchOutput --watch src/ts/*.ts &
     # tsc --noEmit --watch src/ts/*.ts &
     browser-sync start -s $dev -w -f $dev --no-open --no-ghost-mode --no-ui --no-online &
@@ -19,7 +19,7 @@ watch() {
 }
 
 build () {
-    trash ./$out &
+    rm -r --preserve-root $out &
     parcel build -d $out --public-url "." --log-level 4 --no-autoinstall --no-source-maps --experimental-scope-hoisting src/index.pug
 }
 
